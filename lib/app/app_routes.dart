@@ -1,3 +1,4 @@
+import 'package:app/features/auth/screen/otp_screen.dart';
 import 'package:app/features/auth/screen/sign_in_screen.dart';
 import 'package:app/features/auth/screen/sign_up_screen.dart';
 
@@ -28,6 +29,8 @@ class AppRoutes {
       route = WishList();
     } else if (settings.name == ProductDetailsScreen.home) {
       route = ProductDetailsScreen();
+    } else if (settings.name == OtpScreen.home) {
+      route = OtpScreen();
     }
 
     return MaterialPageRoute(

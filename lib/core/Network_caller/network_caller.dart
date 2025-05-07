@@ -29,7 +29,7 @@ class NetwokCaller {
 
       Response response = await get(uri, headers: headers);
       _logresponse(url, response);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200||response.statusCode == 201) {
         final decodedata = jsonDecode(response.body);
 
         return Networkresponse(
@@ -60,14 +60,16 @@ class NetwokCaller {
         body: jsonEncode(body),
       );
       _logresponse(url, response);
-      if (response.statusCode == 200) {
+       final decodedata = jsonDecode(response.body);
+      if (response.statusCode == 200||response.statusCode == 201) {
         //response body
-        final decodedata = jsonDecode(response.body);
+       
 
         return Networkresponse(
           statuscode: response.statusCode,
           issuccess: true,
           responsedata: decodedata,
+          errormessage: decodedata['msg']
         );
       } else {
         return Networkresponse(
