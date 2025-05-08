@@ -30,7 +30,9 @@ class AppRoutes {
     } else if (settings.name == ProductDetailsScreen.home) {
       route = ProductDetailsScreen();
     } else if (settings.name == OtpScreen.home) {
-      route = OtpScreen();
+      final String email = settings.arguments as String;
+    
+      route = OtpScreen(email: email);
     }
 
     return MaterialPageRoute(

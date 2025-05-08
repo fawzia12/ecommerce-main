@@ -16,16 +16,13 @@ import 'package:get/get.dart';
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
   static String home = '/sign_up_screen';
+  // final usermail=_ema
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
   final TextEditingController _name1 = TextEditingController();
   final TextEditingController _name2 = TextEditingController();
   final TextEditingController _email = TextEditingController();
@@ -33,7 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _password = TextEditingController();
   final TextEditingController _city = TextEditingController();
   final GlobalKey<FormState> _fromkey = GlobalKey();
-  final SignUpController signUpController = SignUpController();
+  final SignUpController signUpController = Get.find<SignUpController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,7 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           GetBuilder<SignUpController>(
                             builder: (controller) {
                               return Visibility(
-                                visible: controller.signUpInProgress == false,
+                                visible: !controller.signUpInProgress,
                                 replacement: circularprogressindicator(),
                                 child: Elevatedbutton(
                                   ontap: () {
@@ -201,9 +198,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         phone: _phone.text,
         city: _city.text,
       );
+      print("Before signup - loading: ${signUpController.signUpInProgress}");
       final rasult = await signUpController.signUp(signUpModel);
       if (rasult) {
-        Navigator.pushNamed(context, OtpScreen.home);
+        // arguments: _email.text
+        Navigator.pushNamed(context, OtpScreen.home,arguments:_email.text );
+        print('Navigating to OtpScreen with email: ${_email.text}');
       } else {
         showsnackbar(context, 'something wrong');
       }

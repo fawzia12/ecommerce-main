@@ -11,20 +11,15 @@ class Coderx extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(
         inputDecorationTheme: InputDecorationTheme(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-             
-              fillColor: Colors.white,
-              filled: true,
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-              ),
-               errorBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-              ),
-              focusedBorder:  OutlineInputBorder(
-                borderSide: BorderSide.none,
-              ),
-        )
+          contentPadding: EdgeInsets.symmetric(horizontal: 20),
+
+          fillColor: Colors.white,
+          filled: true,
+          border: OutlineInputBorder(borderSide: BorderSide.none),
+          errorBorder: OutlineInputBorder(borderSide: BorderSide.none),
+          focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
+        ),
+        // elevatedButtonTheme: ElevatedButtonThemeData(),
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
