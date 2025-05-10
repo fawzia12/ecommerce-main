@@ -50,6 +50,7 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('VerifyOtp')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -61,12 +62,20 @@ class _OtpScreenState extends State<OtpScreen> {
                 SizedBox(height: 100),
                 Center(
                   child: Text(
-                    'Enter OTP code ',
+                    'Coder has been sand to ',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,
                       fontStyle: FontStyle.italic,
                     ),
+                  ),
+                ),
+                Text(
+                  widget.email,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontStyle: FontStyle.italic,
                   ),
                 ),
                 SizedBox(height: 20),
@@ -93,28 +102,8 @@ class _OtpScreenState extends State<OtpScreen> {
                     fieldWidth: 50,
                   ),
                 ),
-                SizedBox(height: 30),
-                GetBuilder<OtpController>(
-                  builder: (controller) {
-                    return Visibility(
-                      visible: controller.OtpInprogress == false,
-                      replacement: circularprogressindicator(),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.cyan,
-                          textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontStyle: FontStyle.normal,
-                          ),
-                          minimumSize: Size(300, 46),
-                        ),
-                        onPressed: ontap,
-                        child: Text('pin code'),
-                      ),
-                    );
-                  },
-                ),
+                SizedBox(height: 1),
+              
                 SizedBox(height: 12),
                 _start != 0
                     ? Row(
@@ -125,7 +114,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 17,
-                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(width: 5),
@@ -168,6 +157,28 @@ class _OtpScreenState extends State<OtpScreen> {
                         ),
                       ],
                     ),
+                SizedBox(height: 17),
+                GetBuilder<OtpController>(
+                  builder: (controller) {
+                    return Visibility(
+                      visible: controller.OtpInprogress == false,
+                      replacement: circularprogressindicator(),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.cyan,
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontStyle: FontStyle.normal,
+                          ),
+                          minimumSize: Size(300, 46),
+                        ),
+                        onPressed: ontap,
+                        child: Text('pin code'),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -195,5 +206,11 @@ class _OtpScreenState extends State<OtpScreen> {
     } else {
       showsnackbar(context, _otpController.erromessage!);
     }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }

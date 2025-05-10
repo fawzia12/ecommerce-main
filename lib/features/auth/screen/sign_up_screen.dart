@@ -40,143 +40,142 @@ class _SignUpScreenState extends State<SignUpScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              SizedBox(height: 60),
-              Image.asset(AppImagePath.back),
+              SizedBox(height: 2),
+              Image.asset(AppImagePath.back, scale: 2, height: 90),
 
               Container(
-                height: 600,
-                width: 320,
+                height: 567,
+                width: 340,
                 decoration: BoxDecoration(
                   color: Colors.blue[50],
                   borderRadius: BorderRadius.circular(20),
                 ),
 
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Form(
-                      key: _fromkey,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20),
-                          Center(
-                            child: Text(
-                              'Sign -Up',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 24,
-                                fontStyle: FontStyle.italic,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Form(
+                    key: _fromkey,
+                    child: Column(
+                      children: [
+                        SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            'Sign -Up',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 24,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 26),
+                        TextFormField(
+                          controller: _name1,
+                          decoration: const InputDecoration(
+                            hintText: '  fast name',
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'enter  fast your name';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: _name2,
+                          decoration: const InputDecoration(
+                            hintText: '  last name',
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'enter last name';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: _email,
+                          decoration: const InputDecoration(
+                            hintText: '  email',
+                          ),
+
+                          validator: (String? value) {
+                            String email = value ?? '';
+                            if (!EmailValidator.validate(email)) {
+                              return 'please valied email';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: _phone,
+                          decoration: const InputDecoration(
+                            hintText: '  phone',
+                          ),
+                          validator: (String? value) {
+                            String phone = value ?? '';
+                            final RegExp bdPhoneRegex = RegExp(
+                              r'^(01)[3-9][0-9]{8}$',
+                            );
+                            if (!bdPhoneRegex.hasMatch(phone)) {
+                              return 'enter your valied phone number';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: _password,
+                          decoration: const InputDecoration(
+                            hintText: '  password',
+                          ),
+                          validator: (String? value) {
+                            if ((value!.trim().isEmpty) || value.length < 6) {
+                              return 'your password must be 6 caracter';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: _city,
+                          decoration: const InputDecoration(hintText: '  city'),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'enter city name';
+                            }
+                            return null;
+                          },
+                        ),
+
+                        SizedBox(height: 20),
+
+                        GetBuilder<SignUpController>(
+                          builder: (controller) {
+                            return Visibility(
+                              visible: controller.signUpInProgress == false,
+                              replacement: circularprogressindicator(),
+                              child: Elevatedbutton(
+                                text: 'signup',
+                                ontap: () {
+                                  _onTapSignUpButton();
+                                },
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 26),
-                          TextFormField(
-                            controller: _name1,
-                            decoration: const InputDecoration(
-                              hintText: '  fast name',
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'enter  fast your name';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 10),
-                          TextFormField(
-                            controller: _name2,
-                            decoration: const InputDecoration(
-                              hintText: '  last name',
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'enter last name';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 10),
-                          TextFormField(
-                            controller: _email,
-                            decoration: const InputDecoration(
-                              hintText: '  email',
-                            ),
-
-                            validator: (String? value) {
-                              String email = value ?? '';
-                              if (!EmailValidator.validate(email)) {
-                                return 'please valied email';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 10),
-                          TextFormField(
-                            controller: _phone,
-                            decoration: const InputDecoration(
-                              hintText: '  phone',
-                            ),
-                            validator: (String? value) {
-                              String phone = value ?? '';
-                              final RegExp bdPhoneRegex = RegExp(
-                                r'^(01)[3-9][0-9]{8}$',
-                              );
-                              if (!bdPhoneRegex.hasMatch(phone)) {
-                                return 'enter your valied phone number';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 10),
-                          TextFormField(
-                            controller: _password,
-                            decoration: const InputDecoration(
-                              hintText: '  password',
-                            ),
-                            validator: (String? value) {
-                              if ((value!.trim().isEmpty) || value.length < 6) {
-                                return 'your password must be 6 caracter';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 10),
-                          TextFormField(
-                            controller: _city,
-                            decoration: const InputDecoration(
-                              hintText: '  city',
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'enter city name';
-                              }
-                              return null;
-                            },
-                          ),
-
-                          SizedBox(height: 20),
-
-                          GetBuilder<SignUpController>(
-                            builder: (controller) {
-                              return Visibility(
-                                visible: !controller.signUpInProgress,
-                                replacement: circularprogressindicator(),
-                                child: Elevatedbutton(
-                                  ontap: () {
-                                    _onTapSignUpButton();
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                          SizedBox(height: 16),
-                          Richtext(
-                            ontap: () {
-                              Navigator.pushNamed(context, SignInScreen.home);
-                            },
-                          ),
-                        ],
-                      ),
+                            );
+                          },
+                        ),
+                        SizedBox(height: 16),
+                        Richtext(
+                          text1: "Dont have a account?",
+                          text2: "SignIn",
+                          ontap: () {
+                            Navigator.pushNamed(context, SignInScreen.home);
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -190,22 +189,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _onTapSignUpButton() async {
     if (_fromkey.currentState!.validate()) {
-      SignUpModel signUpModel = SignUpModel(
-        fastname: _name1.text,
-        lastname: _name2.text,
-        email: _email.text,
-        password: _password.text,
-        phone: _phone.text,
-        city: _city.text,
-      );
-      print("Before signup - loading: ${signUpController.signUpInProgress}");
-      final rasult = await signUpController.signUp(signUpModel);
-      if (rasult) {
-        // arguments: _email.text
-        Navigator.pushNamed(context, OtpScreen.home,arguments:_email.text );
-        print('Navigating to OtpScreen with email: ${_email.text}');
-      } else {
-        showsnackbar(context, 'something wrong');
+      try {
+        SignUpModel signUpModel = SignUpModel(
+          fastname: _name1.text,
+          lastname: _name2.text,
+          email: _email.text,
+          password: _password.text,
+          phone: _phone.text,
+          city: _city.text,
+        );
+        final rasult = await signUpController.signUp(signUpModel);
+        if (rasult) {
+          Navigator.pushNamed(context, OtpScreen.home, arguments: _email.text);
+          showsnackbar(context, 'An otp sand you eamil');
+        }
+      } catch (e) {
+        showsnackbar(context, 'eroor:${e.toString()}');
       }
     }
   }

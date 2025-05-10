@@ -1,9 +1,8 @@
 import 'package:app/app/app_image_path.dart';
-import 'package:app/features/common/screen/bottom_nav_bar.dart';
-import 'package:app/features/auth/screen/sign_up_screen.dart';
-import 'package:app/features/home/widget/customtextfiled.dart';
+import 'package:app/features/auth/widget/elevatedbutton.dart';
+import 'package:app/features/auth/widget/rich_text.dart';
 
-import 'package:flutter/gestures.dart';
+import 'package:app/features/home/widget/customtextfiled.dart';
 
 import 'package:flutter/material.dart';
 
@@ -52,54 +51,16 @@ class _SignInScreenState extends State<SignInScreen> {
                     SizedBox(height: 10),
                     Customtextfiled(text: 'password'),
                     SizedBox(height: 10),
-                    GestureDetector(
-                      child: Container(
-                        height: 50,
-                        width: 190,
 
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.blue[100],
-                        ),
-                        child: Center(
-                          child: Text(
-                            'login',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.pushNamed(context, BottomNavBar.home);
-                      },
-                    ),
+                    Elevatedbutton(text: 'signIn', ontap: () {}),
                     SizedBox(height: 20),
 
-                    RichText(
-                      text: TextSpan(
-                        text: "Dont have a account?",
-                        style: const TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'Sign up',
-                            style: const TextStyle(color: Colors.red),
-                            recognizer:
-                                TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushNamed(
-                                      context,
-                                      SignUpScreen.home,
-                                    );
-                                  },
-                          ),
-                        ],
-                      ),
+                    Richtext(
+                      text1: "Dont have a account?",
+                      text2: "SignIn",
+                      ontap: () {
+                        Navigator.pushNamed(context, SignInScreen.home);
+                      },
                     ),
                   ],
                 ),
