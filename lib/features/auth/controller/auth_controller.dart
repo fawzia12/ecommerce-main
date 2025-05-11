@@ -23,10 +23,17 @@ class AuthController {
 
     String? userData = sh.getString(_UserDatakey);
     if (userData != null) {
-      // Map<String, dynamic> usermap = jsonDecode(userData!);(convert into string)
-
-      // UserModel userModel = UserModel.fromJson(usermap);(convert into json)
       user = UserModel.fromJson(jsonDecode(userData));
     }
+  }
+
+  Future<bool> islogedIn() async {
+    SharedPreferences sh = await SharedPreferences.getInstance();
+    String? accessToken = sh.getString(_tokenkey);
+    if (accessToken != null) {
+      await getUserData();
+      return true;
+    }
+    return false;
   }
 }
